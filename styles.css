@@ -1,0 +1,45 @@
+/* Table Container */
+.table-container {
+    max-width: 100%;
+    overflow-x: auto;
+    padding: 20px;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #222; /* Dark theme background */
+    color: #fff; /* White text */
+    font-family: 'Arial', sans-serif;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Table Header */
+thead {
+    background: #444; /* Dark gray header */
+}
+
+thead th {
+    padding: 12px;
+    text-align: left;
+    font-size: 16px;
+    border-bottom: 2px solid #666;
+    cursor: pointer;
+}
+
+/* Sorting Indicator */
+thead th::after {
+    content: ' ▼';
+    font-size: 12px;
+    opacity: 0.5;
+}
+
+/* Table Rows */
+tbody tr:nth-child(even) {
+    background: #333; /* Slightly lighter for zebra effect */
+}
+
+tbody tr:hover {
+    background: #555; /* Highl
