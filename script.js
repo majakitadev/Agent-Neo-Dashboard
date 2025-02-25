@@ -9,18 +9,29 @@ document.addEventListener("DOMContentLoaded", function () {
             const isAscending = header.classList.contains("asc");
             const direction = isAscending ? -1 : 1;
 
-            // Remove previous sorting class
+            // Remove previous sorting class from all headers
             headers.forEach(h => h.classList.remove("asc", "desc"));
             header.classList.add(isAscending ? "desc" : "asc");
 
             rows.sort((rowA, rowB) => {
-                const cellA = rowA.children[index].innerText.trim();
-                const cellB = rowB.children[index].innerText.trim();
+                let cellA = rowA.children[index].textContent.trim();
+                let cellB = rowB.children[index].textContent.trim();
 
-                return cellA.localeCompare(cellB, undefined, { numeric: true }) * direction;
+                // Convert to numbers if applicable
+                const numA = parseFloat(cellA);
+                const numB = parseFloat(cellB);
+
+                if (!isNaN(numA) && !isNaN(numB)) {
+                    return (numA - numB) * direction; // Numeric sorting
+                } else {
+                    return cellA.localeCompare(cellB, undefined, { numeric: true, sensitivity: 'base' }) * direction;
+                }
             });
 
-            rows.forEach(row => tbody.appendChild(row));
+            // Append sorted rows back to the table using DocumentFragment for better performance
+            const fragment = document.createDocumentFragment();
+            rows.forEach(row => fragment.appendChild(row));
+            tbody.appendChild(fragment);
         });
     });
 });
