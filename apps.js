@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 row.innerHTML = `
                     <td>${item.Number}</td>
                     <td>${item.Influencer}</td>
-                    <td>${item.ITS_Score_Average}</td>
+                    <td>${item["ITS Score Average"]}</td>
                     <td>${item.Verdict}</td>
                 `;
                 tableBody.appendChild(row);
