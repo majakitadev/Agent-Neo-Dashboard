@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const table = document.querySelector("#neo-table"); // Use the correct ID
+    const table = document.querySelector("#neo-table");
     if (!table) {
         console.error("Table not found!");
         return;
@@ -13,59 +13,70 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-    function attachSorting() {
-        headers.forEach((header, index) => {
-            header.addEventListener("click", () => {
-                console.log(`Sorting column ${index + 1}: ${header.textContent.trim()}`); // Debugging log
+    function sortTable(columnIndex) {
+        const rows = Array.from(tbody.querySelectorAll("tr"));
+        if (rows.length === 0) {
+            console.warn("No data in table to sort.");
+            return;
+        }
 
-                const rows = Array.from(tbody.querySelectorAll("tr"));
-                if (rows.length === 0) {
-                    console.warn("No data in table to sort.");
-                    return;
-                }
+        console.log(`Sorting column ${columnIndex + 1}`);
 
-                const isAscending = header.classList.contains("asc");
-                const direction = isAscending ? -1 : 1;
+        // Determine sorting direction
+        const header = headers[columnIndex];
+        const isAscending = header.dataset.order === "asc";
+        const direction = isAscending ? -1 : 1;
 
-                // Remove sorting classes from all headers
-                headers.forEach(h => h.classList.remove("asc", "desc"));
-                header.classList.add(isAscending ? "desc" : "asc");
-
-                rows.sort((rowA, rowB) => {
-                    let cellA = rowA.children[index]?.textContent.trim() || "";
-                    let cellB = rowB.children[index]?.textContent.trim() || "";
-
-                    console.log(`Comparing: "${cellA}" vs "${cellB}"`); // Debugging log
-
-                    const numA = parseFloat(cellA);
-                    const numB = parseFloat(cellB);
-
-                    if (!isNaN(numA) && !isNaN(numB)) {
-                        return (numA - numB) * direction; // Numeric sorting
-                    } else {
-                        return cellA.localeCompare(cellB, undefined, { numeric: true, sensitivity: 'base' }) * direction;
-                    }
-                });
-
-                // Append sorted rows back
-                tbody.innerHTML = ""; // Clear current rows
-                rows.forEach(row => tbody.appendChild(row));
-
-                console.log("Sorting completed!"); // Debugging log
-            });
+        // Remove sorting indicators from all headers
+        headers.forEach(h => {
+            h.dataset.order = "";
+            h.querySelector(".arrow").textContent = ""; // Clear arrows
         });
+
+        // Set new sorting order and update arrow
+        header.dataset.order = isAscending ? "desc" : "asc";
+        header.querySelector(".arrow").textContent = isAscending ? " ▼" : " ▲";
+
+        // Sort rows
+        rows.sort((rowA, rowB) => {
+            let cellA = rowA.children[columnIndex]?.textContent.trim() || "";
+            let cellB = rowB.children[columnIndex]?.textContent.trim() || "";
+
+            console.log(`Comparing: "${cellA}" vs "${cellB}"`);
+
+            // Check if values are numbers
+            const numA = parseFloat(cellA);
+            const numB = parseFloat(cellB);
+
+            if (!isNaN(numA) && !isNaN(numB)) {
+                return (numA - numB) * direction; // Numeric sorting
+            } else {
+                return cellA.localeCompare(cellB, undefined, { numeric: true, sensitivity: 'base' }) * direction;
+            }
+        });
+
+        // Append sorted rows back
+        tbody.innerHTML = ""; // Clear tbody
+        rows.forEach(row => tbody.appendChild(row));
+
+        console.log("Sorting completed!");
     }
 
-    // If your table gets data dynamically, use MutationObserver
+    // Attach sorting event listeners to headers
+    headers.forEach((header, index) => {
+        // Add arrow span inside the header
+        header.innerHTML += ` <span class="arrow"></span>`;
+
+        header.addEventListener("click", () => sortTable(index));
+    });
+
+    // Check if data is dynamically inserted
     const observer = new MutationObserver(() => {
         console.log("Table data updated! Enabling sorting...");
-        attachSorting();
+        headers.forEach((header, index) => {
+            header.addEventListener("click", () => sortTable(index));
+        });
     });
 
     observer.observe(tbody, { childList: true });
-
-    // If the table is already populated, attach sorting immediately
-    if (tbody.children.length > 0) {
-        attachSorting();
-    }
 });
