@@ -1,62 +1,29 @@
-/* Table Container with Scrollbar */
-.table-container {
-    width: 100%;
-    max-width: 1000px; /* Adjust width as needed */
-    margin: 20px auto;
-    padding: 10px;
-    border-radius: 10px;
-    overflow-x: auto; /* Enable horizontal scrolling */
-    overflow-y: auto; /* Enable vertical scrolling */
-    max-height: 500px; /* Set max height for vertical scroll */
-    backdrop-filter: blur(10px); /* Glass effect */
-    background: rgba(255, 255, 255, 0.1); /* Transparent background */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    scrollbar-width: thin;
-    scrollbar-color: #888 #222;
-}
-
-/* Scrollbar Styling */
-.table-container::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-}
-
-.table-container::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 5px;
-}
-
-.table-container::-webkit-scrollbar-track {
-    background: #222;
-}
-
 /* Table Styling */
 table {
     width: 100%;
     border-collapse: collapse;
+    margin: 20px 0;
     font-size: 16px;
     text-align: left;
+    background-color: #222;
     color: #fff;
     border-radius: 10px;
-}
-
-/* Transparent Table Rows */
-td, th {
-    padding: 12px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* Table Header */
 th {
-    background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent */
+    background-color: #444;
+    color: #fff;
+    padding: 12px;
     cursor: pointer;
     font-weight: bold;
 }
 
 /* Hover effect for sorting */
 th:hover {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: #555;
 }
 
 /* Sorted column indicator */
@@ -68,28 +35,24 @@ th.desc::after {
     content: " ▼";
 }
 
+/* Table Row Styling */
+td {
+    padding: 10px;
+    border-bottom: 1px solid #555;
+}
+
 /* Alternate row colors */
 tr:nth-child(even) {
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: #333;
 }
 
 /* Hover effect */
 tr:hover {
-    background-color: rgba(255, 255, 255, 0.15);
-}
-
-/* Smooth Scrolling */
-.table-container {
-    scroll-behavior: smooth;
+    background-color: #444;
 }
 
 /* Responsive Design */
 @media screen and (max-width: 768px) {
-    .table-container {
-        max-width: 90%;
-        max-height: 400px;
-    }
-
     table {
         font-size: 14px;
     }
