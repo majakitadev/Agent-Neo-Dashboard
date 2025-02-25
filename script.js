@@ -13,12 +13,21 @@ document.addEventListener("DOMContentLoaded", function () {
             headers.forEach(h => h.classList.remove("asc", "desc"));
             header.classList.add(isAscending ? "desc" : "asc");
 
-            // Sort rows
+            // Sort rows based on content type (numbers vs text)
             rows.sort((rowA, rowB) => {
-                const cellA = rowA.children[index].innerText.trim().toLowerCase();
-                const cellB = rowB.children[index].innerText.trim().toLowerCase();
+                let cellA = rowA.children[index].innerText.trim();
+                let cellB = rowB.children[index].innerText.trim();
 
-                return cellA.localeCompare(cellB, undefined, { numeric: true }) * direction;
+                // Convert numeric values properly for sorting
+                let numA = parseFloat(cellA.replace(/[^0-9.-]/g, ""));
+                let numB = parseFloat(cellB.replace(/[^0-9.-]/g, ""));
+
+                // Check if values are numbers
+                if (!isNaN(numA) && !isNaN(numB)) {
+                    return (numA - numB) * direction;
+                } else {
+                    return cellA.localeCompare(cellB, undefined, { numeric: true }) * direction;
+                }
             });
 
             // Append sorted rows
