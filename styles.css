@@ -14,48 +14,26 @@ table {
     font-family: 'Arial', sans-serif;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Soft shadow */
-}
-
-/* Sticky Header */
-thead {
-    background: #444; /* Dark gray header */
-    position: sticky;
-    top: 0;
-    z-index: 10;
 }
 
 /* Table Header */
+thead {
+    background: #444; /* Dark gray header */
+}
+
 thead th {
     padding: 12px;
     text-align: left;
     font-size: 16px;
     border-bottom: 2px solid #666;
     cursor: pointer;
-    position: relative;
-    transition: background 0.3s ease-in-out;
-}
-
-thead th:hover {
-    background: #555; /* Slight highlight */
 }
 
 /* Sorting Indicator */
 thead th::after {
-    content: ' ';
+    content: ' ▼';
     font-size: 12px;
     opacity: 0.5;
-    margin-left: 8px;
-}
-
-thead th.asc::after {
-    content: ' ▲';
-    opacity: 1;
-}
-
-thead th.desc::after {
-    content: ' ▼';
-    opacity: 1;
 }
 
 /* Table Rows */
@@ -65,25 +43,12 @@ tbody tr:nth-child(even) {
 
 tbody tr:hover {
     background: #555; /* Highlight on hover */
-    transition: background 0.3s ease-in-out;
 }
 
 /* Table Cells */
 td {
     padding: 10px;
     border-bottom: 1px solid #444;
-}
-
-/* Smooth Row Sorting */
-tbody {
-    display: block;
-    width: 100%;
-}
-
-tbody tr {
-    display: table;
-    width: 100%;
-    transition: all 0.3s ease-in-out;
 }
 
 /* Mobile Responsiveness */
