@@ -14,13 +14,20 @@ document.addEventListener("DOMContentLoaded", function () {
             header.classList.add(isAscending ? "desc" : "asc");
 
             rows.sort((rowA, rowB) => {
-                const cellA = rowA.children[index].innerText.trim();
-                const cellB = rowB.children[index].innerText.trim();
+                let cellA = rowA.children[index]?.innerText.trim() || "0"; // Fix undefined issue
+                let cellB = rowB.children[index]?.innerText.trim() || "0"; 
 
-                return cellA.localeCompare(cellB, undefined, { numeric: true }) * direction;
+                // Convert to number if column is ITS Score
+                if (index === 2) {  
+                    cellA = parseFloat(cellA) || 0;
+                    cellB = parseFloat(cellB) || 0;
+                }
+
+                return (cellA > cellB ? 1 : -1) * direction;
             });
 
             rows.forEach(row => tbody.appendChild(row));
         });
     });
 });
+
