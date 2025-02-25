@@ -1,63 +1,63 @@
+/* Table Container */
+.table-container {
+    max-width: 100%;
+    overflow-x: auto;
+    padding: 20px;
+}
+
 /* Table Styling */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
-    font-size: 16px;
-    text-align: left;
-    background-color: #222;
-    color: #fff;
-    border-radius: 10px;
+    background: #222; /* Dark theme background */
+    color: #fff; /* White text */
+    font-family: 'Arial', sans-serif;
+    border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* Table Header */
-th {
-    background-color: #444;
-    color: #fff;
+thead {
+    background: #444; /* Dark gray header */
+}
+
+thead th {
     padding: 12px;
+    text-align: left;
+    font-size: 16px;
+    border-bottom: 2px solid #666;
     cursor: pointer;
-    font-weight: bold;
 }
 
-/* Hover effect for sorting */
-th:hover {
-    background-color: #555;
+/* Sorting Indicator */
+thead th::after {
+    content: ' ▼';
+    font-size: 12px;
+    opacity: 0.5;
 }
 
-/* Sorted column indicator */
-th.asc::after {
-    content: " ▲";
+/* Table Rows */
+tbody tr:nth-child(even) {
+    background: #333; /* Slightly lighter for zebra effect */
 }
 
-th.desc::after {
-    content: " ▼";
+tbody tr:hover {
+    background: #555; /* Highlight on hover */
 }
 
-/* Table Row Styling */
+/* Table Cells */
 td {
     padding: 10px;
-    border-bottom: 1px solid #555;
+    border-bottom: 1px solid #444;
 }
 
-/* Alternate row colors */
-tr:nth-child(even) {
-    background-color: #333;
-}
-
-/* Hover effect */
-tr:hover {
-    background-color: #444;
-}
-
-/* Responsive Design */
-@media screen and (max-width: 768px) {
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
     table {
         font-size: 14px;
     }
 
-    th, td {
-        padding: 8px;
+    thead th {
+        font-size: 14px;
     }
 }
