@@ -8,7 +8,7 @@
         .team-section h2 {
 			color: rgba(165,179,212,1.00);;
             font-size: 3.5em;
-			font-weight: 800;
+			font-weight: 400;
 			margin-bottom: 15px;
 			letter-spacing: 2px;
             text-shadow: 
@@ -55,7 +55,7 @@ table {
     font-optical-sizing: auto;
     font-weight: 200;
     font-style: normal;
-    font-size: 20px;        /* Font size */
+    font-size: 22px;        /* Font size */
     border-radius: 8px;
     overflow: hidden;
 }
