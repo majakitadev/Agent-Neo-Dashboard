@@ -10,8 +10,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 row.innerHTML = `
                     <td>${item.Number}</td>
                     <td>${item.Influencer}</td>
-                    <td>${item["ITS Score Average"]}</td>
                     <td>${item.Verdict}</td>
+                    <td>${item["ITS Score Average"]}</td>
                 `;
                 tableBody.appendChild(row);
             });
