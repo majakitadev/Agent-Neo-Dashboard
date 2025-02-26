@@ -48,9 +48,14 @@
 table {
     width: 100%;
     border-collapse: collapse;
-    background: #222; /* Dark theme background */
     color: #fff; /* White text */
-    font-family: 'Arial', sans-serif;
+    background-color: rgba(0,73,121,0.250); /* Dark background */
+    color: white;           /* Default text color is white */
+    font-family: "Exo 2", serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 20px;        /* Font size */
     border-radius: 8px;
     overflow: hidden;
 }
