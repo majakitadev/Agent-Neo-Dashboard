@@ -29,13 +29,6 @@ thead th {
     cursor: pointer;
 }
 
-/* Sorting Indicator */
-thead th::after {
-    content: ' ▼';
-    font-size: 12px;
-    opacity: 0.5;
-}
-
 /* Table Rows */
 tbody tr:nth-child(even) {
     background: #333; /* Slightly lighter for zebra effect */
