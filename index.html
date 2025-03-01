@@ -3,44 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AINeo Apps</title>
+    <title>AINEO Dashboard</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <h1>AINeo Apps</h1>
-        <nav>
-            <a href="index.html"></a>
-            <a href="apps.html"></a>
-        </nav>
-    </header>
+    <section>
+        <h1>Agent Neo Dashboard</h1>
+        <div class="table-container">
+        <div class="tbl.header">
+ 
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search Influencer..." onkeyup="searchTable()">
+            </div>
+            
+            <table cellspacing="0" cellspacing="0" border="0">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Influencer</th>
+                        <th>Score</th>
+                        <th>Verdict</th>
+                        <th>24H change</th>
+                    </tr>
 
-    <main>
-        <section class="team-section">
-			<h2>AINEO Influencer Trust Score</h2>
-			<div class="bordered-text">
-            Below is the list of influencers Agent Neo has interacted with and their trust scores.
-			</div>
-	</section>
-	    
-        <table id="neo-table">
-            <thead>
-                <tr>
-                    <th>Number</th>
-                    <th>Influencer</th>
-                    <th>Verdict</th>
-                    <th>ITS Score (Average)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Data will be inserted here dynamically -->
-            </tbody>
-        </table>
-       </main>
+                </thead>
+            </table>
+        </div>
 
-    <script src="apps.js"></script>
+
+        <div class="tbl-content">
+            <table cellspacing="0" cellspacing="0" border="0">
+                <tbody>
+                    
+                </tbody>
+            </table>
+        </div>
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

@@ -1,54 +1,79 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const table = document.querySelector("#neo-table");
-    if (!table) {
-        console.error("Table not found!");
-        return;
-    }
+$(window).on("load resize", function () {
+    var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+    $('.tbl-header').css({ 'padding-right': scrollWidth });
+}).resize();
 
-    const tbody = table.querySelector("tbody");
-    if (!tbody) {
-        console.error("Table body not found!");
-        return;
-    }
+$(document).ready(function () {
+    let tableBody = $(".tbl-content tbody");
 
-    function sortTableByScore() {
-        const rows = Array.from(tbody.querySelectorAll("tr"));
-        if (rows.length === 0) {
-            console.warn("No data in table to sort.");
-            return;
+    // 🔹 Load previous ranking from localStorage (or API)
+    let prevRanking = JSON.parse(localStorage.getItem("prevRanking")) || {};
+
+    // 🔹 Fetch Data from Google Sheets
+    $.ajax({
+        url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTpUf-yalHcpEA_eDdYubWxNKn5HrEKsOFJBXJImWDxpHdJol8t90iItmnH8JcQXWY1lUjOihsVFwRA/pub?output=csv",
+        dataType: "text",
+        success: function (data) {
+            let rows = data.split("\n").slice(1); // Skip header row
+            let tableRows = [];
+
+            rows.forEach((row, index) => {
+                let cols = row.split(",");
+
+                if (cols.length >= 3) {
+                    let influencer = cols[0].trim();
+                    
+                    // Convert score to float and format to 1 decimal
+                    let score = parseFloat(cols[1].replace(/[^0-9.]/g, "")).toFixed(1);
+                    
+                    // Remove quotes from verdict
+                    let verdict = cols[2].trim().replace(/^"|"$/g, "");
+
+                    tableRows.push({ influencer, score, verdict });
+                }
+            });
+
+            // 🔹 Sort data by score (highest to lowest)
+            tableRows.sort((a, b) => b.score - a.score);
+
+            // 🔹 Track Rank Changes
+            let newRanking = {};
+            tableBody.empty();
+            tableRows.forEach((entry, index) => {
+                let prevRank = prevRanking[entry.influencer] || index + 1; // Default to current rank if no previous record
+                let rankChange = prevRank - (index + 1);
+                let changeSymbol = rankChange > 0 ? "⬆️" : rankChange < 0 ? "⬇️" : "➖";
+
+                // Store new ranking for next update
+                newRanking[entry.influencer] = index + 1;
+
+                let row = `<tr>
+                    <td>${index + 1}</td>
+                    <td>${entry.influencer}</td>
+                    <td>${entry.score}</td>
+                    <td>${entry.verdict}</td>
+                    <td>${changeSymbol} (${Math.abs(rankChange)})</td>
+                </tr>`;
+                tableBody.append(row);
+            });
+
+            // 🔹 Save new ranking in localStorage for next update
+            localStorage.setItem("prevRanking", JSON.stringify(newRanking));
         }
-
-        console.log("Auto-sorting by ITS Score...");
-
-        // Change the index if the ITS Score column is different
-        const scoreColumnIndex = 2; 
-
-        rows.sort((rowA, rowB) => {
-            let cellA = rowA.children[scoreColumnIndex]?.textContent.trim() || "0";
-            let cellB = rowB.children[scoreColumnIndex]?.textContent.trim() || "0";
-
-            // Convert to numbers
-            const numA = parseFloat(cellA);
-            const numB = parseFloat(cellB);
-
-            return numB - numA; // Descending order (highest score at the top)
-        });
-
-        // Append sorted rows back
-        tbody.innerHTML = "";
-        rows.forEach(row => tbody.appendChild(row));
-
-        console.log("Sorting completed!");
-    }
-
-    // Run auto-sort when data is dynamically inserted
-    const observer = new MutationObserver(() => {
-        console.log("Table data updated! Sorting again...");
-        sortTableByScore();
     });
-
-    observer.observe(tbody, { childList: true });
-
-    // Initial sort when page loads
-    sortTableByScore();
 });
+
+// 🔹 Search Function for Influencers
+function searchTable() {
+    let input = document.getElementById("searchInput").value.toUpperCase();
+    let table = document.querySelector(".tbl-content table");
+    let tr = table.getElementsByTagName("tr");
+
+    for (let i = 0; i < tr.length; i++) {
+        let td = tr[i].getElementsByTagName("td")[1]; // 1 is the "Influencer" column index
+        if (td) {
+            let txtValue = td.textContent || td.innerText;
+            tr[i].style.display = txtValue.toUpperCase().indexOf(input) > -1 ? "" : "none";
+        }
+    }
+}

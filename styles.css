@@ -1,100 +1,157 @@
-.team-section {
-            text-align: center;
-            padding: 30px 0px;
-	        padding-bottom: 50px;
-	        z-index: 10;
-        }
+body{
+    background: url('wallaper1.jpg'), 
+                linear-gradient(to right, #0a3825, #04292c);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: 'Roboto', sans-serif;
+    
+}
 
-        .team-section h2 {
-			color: rgba(165,179,212,1.00);;
-            font-size: 3.5em;
-			font-weight: 400;
-			margin-bottom: 15px;
-			letter-spacing: 2px;
-            text-shadow: 
+.search-container {
+    display: flex;
+    justify-content: left;  /* Centers horizontally */
+    align-items: center;      /* Centers vertically (if needed) */
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#searchInput {
+    width: 100%;
+    max-width: 420px;
+    padding: 10px;
+    font-family: "Exo 2", serif;
+    border: 1px solid #dddddd6d;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: rgba(255, 255, 255, 0.0);
+    color: #ffffff;
+}
+
+section{
+    margin: 10px;
+
+}
+
+::-webkit-scrollbar{
+    width: 10px;
+
+}
+
+::-webkit-scrollbar-track{
+    -webkit-box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.3);
+
+}
+
+::-webkit-scrollbar-thumb{
+    -webkit-box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.3);
+
+}
+
+h1{
+    color: white;           /* Default text color is white */
+	text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
+    font-family: "Exo 2", serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+    font-variation-settings: "ROND" 0;
+    font-size: 50px;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 15px;
+    text-shadow: 
               0px 0px 5px rgba(63, 120, 255, 0.8),  /* Outer glow */
               0px 0px 10px rgba(63, 120, 255, 0.6), /* Soft spread */
               -1px -1px 1px #000B87, 
-              1px 1px 1px #121B71; 
-        }
+              1px 1px 1px #121B71;
+    padding-bottom: 50px;
 
- .bordered-text {
-    display: block;  /* Makes the div fit the text size */
-    padding: 20px;          /* Adds padding around the text */
-    border: 0px solid rgba(0,73,121,1.00); /* Green border */
-    border-radius: 8px;     /* Rounded corners */
-    background-color: rgba(0,73,121,0.250); /* Dark background */
-    color: white;           /* Default text color is white */
-    font-family: "Exo 2", serif;
-    font-optical-sizing: auto;
-    font-weight: 200;
-    font-style: normal;
-    font-size: 20px;        /* Font size */
-    line-height: 1.5;       /* Line height for better readability */
-    max-width: 768px;       /* Maximum width for large screens */
-    margin: 20px auto;      /* Center the text block and add spacing */
-    text-align: center;     /* Center the text inside the box */
-	z-index: 10;
-  }
+}
 
-/* Table Container */
 .table-container {
-    max-width: 100%;
-    overflow-x: auto;
-    padding: 20px;
-}
-
-/* Table Styling */
-table {
     width: 100%;
-    border-collapse: collapse;
-    color: #fff; /* White text */
-    background-color: rgba(0,73,121,0.250); /* Dark background */
-    color: white;           /* Default text color is white */
+    max-width: 1000px;   /* Limit total table width */
+    margin: auto;   /* Center the table */
+}
+
+table{
+    width: 100%;
+    table-layout: fixed;
+    
+}
+
+.tbl-header, .tbl-content {
+    width: 100%;    /* Ensure both header and content tables match the container */
+}
+
+.tbl-header{
+    background-color: rgba(255,255,255,0.5);
+
+}
+
+.tbl-content{
+    height: 500px;
+    overflow-x: auto;
+    border: 1px solid rgba(255,255,255,0.3);
+
+}
+
+th{
+    padding: 3px 10px;
     font-family: "Exo 2", serif;
-    font-optical-sizing: auto;
-    font-weight: 200;
-    font-style: normal;
-    font-size: 22px;        /* Font size */
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-/* Table Header */
-thead {
-    background: #444; /* Dark gray header */
-}
-
-thead th {
-    padding: 12px;
     text-align: left;
-    font-size: 16px;
-    border-bottom: 2px solid #666;
-    cursor: pointer;
+    font-weight: 500;
+    font-size: 20px;
+    color: #fff;
+    text-transform: uppercase;
+
 }
 
-/* Table Rows */
-tbody tr:nth-child(even) {
-    background: #333; /* Slightly lighter for zebra effect */
-}
-
-tbody tr:hover {
-    background: #555; /* Highlight on hover */
-}
-
-/* Table Cells */
-td {
+td{
     padding: 10px;
-    border-bottom: 1px solid #444;
+    font-family: "Exo 2", serif;
+    text-align: left;
+    vertical-align: middle;
+    font-weight: 300;
+    font-size: 15px;
+    color: #fff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+}
+th:nth-child(1), td:nth-child(1) { width: 8%; }  /* Ranking */
+th:nth-child(2), td:nth-child(2) { width: 22%}  /* Influencer */
+th:nth-child(3), td:nth-child(3) { width: 15% }  /* Score */
+th:nth-child(4), td:nth-child(4) { width: 45%}  /* Verdict */
+th:nth-child(5), td:nth-child(5) { width: 10%; }  /* Change */
+
+th:nth-child(1), td:nth-child(1),  
+th:nth-child(3), td:nth-child(3) {  
+    text-align: center;
+}
+th:nth-child(5), td:nth-child(5) {
+    text-align: right;
 }
 
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
-    table {
-        font-size: 14px;
+@media screen and (max-width: 768px) {
+    th, td {
+        font-size: 14px;  /* Reduce text size */
+        padding: 10px;  /* Reduce padding */
     }
 
-    thead th {
-        font-size: 14px;
+    th:nth-child(2), td:nth-child(2) { width: 30%; }  /* Adjust influencer column */
+    th:nth-child(3), td:nth-child(3) { width: 20%; }  /* Adjust score */
+    th:nth-child(4), td:nth-child(4) { width: 50%; }  /* Adjust verdict */
+}
+
+/* Extra small screens (mobile) */
+@media screen and (max-width: 400px) {
+    th, td {
+        font-size: 12px; /* Further reduce text size */
+        padding: 8px; /* Reduce padding */
+    }
+
+    .table-container {
+        width: 100%; /* Use full width */
     }
 }
