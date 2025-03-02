@@ -69,6 +69,26 @@ h1{
 
 }
 
+h2{
+    color: white;           /* Default text color is white */
+	text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
+    font-family: "Exo 2", serif;
+    font-optical-sizing: auto;
+    font-weight: 250;
+    font-style: normal;
+    font-variation-settings: "ROND" 0;
+    font-size: 18px;
+    text-align: left;
+    margin-bottom: 15px;
+    padding-bottom: 30px;
+
+    max-width: 1000px; /* Set maximum width */
+    margin-left: auto; 
+    margin-right: auto; /* Centers the text */
+    word-wrap: break-word; /* Ensures long words wrap */
+    overflow-wrap: break-word; /* Additional support for wrapping */
+}
+
 .table-container {
     width: 100%;
     max-width: 1000px;   /* Limit total table width */
@@ -91,7 +111,7 @@ table{
 }
 
 .tbl-content{
-    height: 500px;
+    height: 400px;
     overflow-x: auto;
     border: 1px solid rgba(255,255,255,0.3);
 
@@ -159,4 +179,57 @@ th:nth-child(5), td:nth-child(5) {
     .table-container {
         width: 100%; /* Use full width */
     }
+}
+
+.rank-up::after {
+    content: "";
+    display: inline-block;
+    margin-left: 5px;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 10px solid green; /* Upward triangle */
+}
+
+.rank-down::after {
+    content: "";
+    display: inline-block;
+    margin-left: 5px;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 10px solid red; /* Downward triangle */
+}
+
+/* Blinking Dot Style */
+.blinking-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+    animation: blink-animation 1.5s infinite;
+}
+
+/* Color Categories */
+.trust-green {
+    background-color: green;
+}
+.trust-orange {
+    background-color: orange;
+}
+.trust-yellow {
+    background-color: yellow;
+}
+.trust-red {
+    background-color: red;
+}
+
+/* Blinking Effect */
+@keyframes blink-animation {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
 }

@@ -42,17 +42,32 @@ $(document).ready(function () {
             tableRows.forEach((entry, index) => {
                 let prevRank = prevRanking[entry.influencer] || index + 1; // Default to current rank if no previous record
                 let rankChange = prevRank - (index + 1);
-                let changeSymbol = rankChange > 0 ? "⬆️" : rankChange < 0 ? "⬇️" : "➖";
+                
+                // Determine CSS class for rank change
+                let rankClass = rankChange > 0 ? "rank-up" : rankChange < 0 ? "rank-down" : "";
+
+                // Determine Trust Level Color
+                let trustColorClass = "trust-red"; // Default is very low trust
+                if (entry.score >= 7) {
+                    trustColorClass = "trust-green";
+                } else if (entry.score >= 5) {
+                    trustColorClass = "trust-orange";
+                } else if (entry.score >= 3) {
+                    trustColorClass = "trust-yellow";
+                }
 
                 // Store new ranking for next update
                 newRanking[entry.influencer] = index + 1;
 
                 let row = `<tr>
                     <td>${index + 1}</td>
-                    <td>${entry.influencer}</td>
+                    <td>
+                        <span class="blinking-dot ${trustColorClass}"></span> 
+                        ${entry.influencer}
+                    </td>
                     <td>${entry.score}</td>
                     <td>${entry.verdict}</td>
-                    <td>${changeSymbol} (${Math.abs(rankChange)})</td>
+                    <td class="${rankClass}">(${Math.abs(rankChange)})</td>
                 </tr>`;
                 tableBody.append(row);
             });
