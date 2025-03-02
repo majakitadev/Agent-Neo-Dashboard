@@ -1,6 +1,5 @@
 body{
-    background: url('wallaper1.jpg'), 
-                linear-gradient(to right, #0a3825, #04292c);
+    background: url('wallaper1.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
