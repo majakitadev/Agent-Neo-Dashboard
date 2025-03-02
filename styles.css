@@ -97,6 +97,11 @@ table{
 
 }
 
+.tbl-content table tr:hover {
+    background-color: rgba(255, 255, 255, 0.135); /* Light highlight effect */
+    cursor: pointer; /* Change cursor to indicate interactivity */
+}
+
 th{
     padding: 3px 10px;
     font-family: "Exo 2", serif;
