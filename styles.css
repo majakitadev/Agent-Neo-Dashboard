@@ -139,9 +139,9 @@ th:nth-child(5), td:nth-child(5) {
         padding: 10px;  /* Reduce padding */
     }
 
-    th:nth-child(2), td:nth-child(2) { width: 30%; }  /* Adjust influencer column */
+    th:nth-child(2), td:nth-child(2) { width: 35%; }  /* Adjust influencer column */
     th:nth-child(3), td:nth-child(3) { width: 20%; }  /* Adjust score */
-    th:nth-child(4), td:nth-child(4) { width: 50%; }  /* Adjust verdict */
+    th:nth-child(4), td:nth-child(4) { width: 45%; }  /* Adjust verdict */
 }
 
 /* Extra small screens (mobile) */
