@@ -178,7 +178,7 @@ th:nth-child(5), td:nth-child(5) {
 @media screen and (max-width: 768px) {
     th, td {
         font-size: 12px;  /* Reduce text size */
-        padding: 10px;  /* Reduce padding */
+        padding: 6px 8px;  /* Reduce padding */
     }
 
     th:nth-child(2), td:nth-child(2) { width: 35%; }  /* Adjust influencer column */
@@ -190,7 +190,7 @@ th:nth-child(5), td:nth-child(5) {
 @media screen and (max-width: 400px) {
     th, td {
         font-size: 12px; /* Further reduce text size */
-        padding: 8px; /* Reduce padding */
+        padding: 6px 8px; /* Reduce padding */
     }
 
     .table-container {
