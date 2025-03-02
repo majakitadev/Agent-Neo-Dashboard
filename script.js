@@ -59,7 +59,10 @@ $(document).ready(function () {
                 // Store new ranking for next update
                 newRanking[entry.influencer] = index + 1;
 
-                let row = `<tr>
+                // 🔹 Construct Twitter profile URL
+                let twitterURL = `https://x.com/${entry.influencer}`;
+
+                let row = `<tr class="clickable-row" data-url="${twitterURL}">
                     <td>${index + 1}</td>
                     <td>
                         <span class="blinking-dot ${trustColorClass}"></span> 
@@ -74,21 +77,33 @@ $(document).ready(function () {
 
             // 🔹 Save new ranking in localStorage for next update
             localStorage.setItem("prevRanking", JSON.stringify(newRanking));
+
+            // 🔹 Add click event to open influencer's X profile
+            $(".clickable-row").on("click", function () {
+                let url = $(this).data("url");
+                window.open(url, "_blank"); // Open link in a new tab
+            });
         }
     });
+
+    // 🔹 Search Function for Influencers
+    $("#searchInput").on("input", function () {
+        let input = this.value.toUpperCase();
+        let table = $(".tbl-content table");
+        let tr = table.find("tr");
+
+        tr.each(function () {
+            let td = $(this).find("td:eq(1)"); // 1 is the "Influencer" column index
+            if (td.length) {
+                let txtValue = td.text().toUpperCase();
+                $(this).toggle(txtValue.indexOf(input) > -1);
+            }
+        });
+    });
+
+    // 🔹 Clear Search Button Functionality
+    $("#clearSearch").on("click", function () {
+        $("#searchInput").val(""); // Clear input field
+        $(".tbl-content table tr").show(); // Show all rows
+    });
 });
-
-// 🔹 Search Function for Influencers
-function searchTable() {
-    let input = document.getElementById("searchInput").value.toUpperCase();
-    let table = document.querySelector(".tbl-content table");
-    let tr = table.getElementsByTagName("tr");
-
-    for (let i = 0; i < tr.length; i++) {
-        let td = tr[i].getElementsByTagName("td")[1]; // 1 is the "Influencer" column index
-        if (td) {
-            let txtValue = td.textContent || td.innerText;
-            tr[i].style.display = txtValue.toUpperCase().indexOf(input) > -1 ? "" : "none";
-        }
-    }
-}

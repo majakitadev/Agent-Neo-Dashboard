@@ -14,6 +14,7 @@ body{
     align-items: center;      /* Centers vertically (if needed) */
     width: 100%;
     margin-bottom: 10px;
+    gap: 10px; /* Adds spacing between input and button */
 }
 
 #searchInput {
@@ -26,6 +27,24 @@ body{
     font-size: 14px;
     background-color: rgba(255, 255, 255, 0.0);
     color: #ffffff;
+}
+
+/* Styling for Clear Button */
+#clearSearch {
+    padding: 10px 15px;
+    font-size: 14px;
+    font-family: "Exo 2", serif;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid #dddddd6d;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#clearSearch:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ff7b00;
 }
 
 section{
