@@ -89,7 +89,6 @@ h1{
 
 h2{
     color: white;           /* Default text color is white */
-	text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
     font-family: "Exo 2", serif;
     font-optical-sizing: auto;
     font-weight: 250;
