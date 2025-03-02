@@ -179,7 +179,7 @@ th:nth-child(5), td:nth-child(5) {
 
 @media screen and (max-width: 768px) {
     th, td {
-        font-size: 14px;  /* Reduce text size */
+        font-size: 12px;  /* Reduce text size */
         padding: 10px;  /* Reduce padding */
     }
 
