@@ -24,7 +24,7 @@ $(document).ready(function () {
                     let influencer = cols[0].trim();
                     
                     // Convert score to float and format to 1 decimal
-                    let score = parseFloat(cols[1].replace(/[^0-9.]/g, "")).toFixed(1);
+                    let score = parseFloat(cols[1].replace(/[^0-9.]/g, "")).toFixed(score % 1 === 0 ? 1 : 2);
                     
                     // Remove quotes from verdict
                     let verdict = cols[2].trim().replace(/^"|"$/g, "");
