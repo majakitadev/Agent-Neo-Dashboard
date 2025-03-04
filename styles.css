@@ -1,4 +1,5 @@
-body{
+html, body{
+    background: transparent;
     background: url('wallaper1.jpg');
     background-size: cover;
     background-position: center;
