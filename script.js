@@ -23,7 +23,7 @@ $(document).ready(function () {
 
     // 🔹 Fetch Data from Google Sheets
     $.ajax({
-        url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTpUf-yalHcpEA_eDdYubWxNKn5HrEKsOFJBXJImWDxpHdJol8t90iItmnH8JcQXWY1lUjOihsVFwRA/pub?output=csv",
+        url: `https://docs.google.com/spreadsheets/d/e/2PACX-1vTpUf-yalHcpEA_eDdYubWxNKn5HrEKsOFJBXJImWDxpHdJol8t90iItmnH8JcQXWY1lUjOihsVFwRA/pub?output=csv&cacheBuster=${Date.now()}`,
         dataType: "text",
         success: function (data) {
             let rows = data.split("\n").slice(1); // Skip header row
@@ -46,9 +46,11 @@ $(document).ready(function () {
 
             // 🔹 Upload Data to Firebase
             let rankingRef = database.ref("ranking");
-            rankingRef.set({
-                timestamp: Date.now(),
-                data: tableRows
+            rankingRef.remove().then(() => { // Clear previous data first
+                rankingRef.set({
+                    timestamp: Date.now(),
+                    data: tableRows
+                });
             });
 
             console.log("✅ Data successfully stored in Firebase!");
@@ -62,7 +64,7 @@ $(document).ready(function () {
     // 🔹 Reference Firebase Database
     let rankingRef = database.ref("ranking");
 
-    rankingRef.once("value", (snapshot) => {
+    rankingRef.on("value", (snapshot) => {
         if (snapshot.exists()) {
             let rankingData = snapshot.val();
             let tableRows = rankingData.data;
