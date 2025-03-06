@@ -6,7 +6,7 @@ $(window).on("load resize", function () {
 $(document).ready(function () {
     let tableBody = $(".tbl-content tbody");
 
-    // 🔹 Load previous ranking from localStorage (or API)
+    // 🔹 Load previous ranking from localStorage before updating the table
     let prevRanking = JSON.parse(localStorage.getItem("prevRanking")) || {};
 
     // 🔹 Fetch Data from Google Sheets
@@ -17,13 +17,13 @@ $(document).ready(function () {
             let rows = data.split("\n").slice(1); // Skip header row
             let tableRows = [];
 
-            rows.forEach((row, index) => {
+            rows.forEach((row) => {
                 let cols = row.split(",");
 
                 if (cols.length >= 3) {
                     let influencer = cols[0].trim();
                     
-                    // Convert score to float and format to 1 decimal
+                    // Convert score to float and enforce 2 decimal places
                     let score = parseFloat(cols[1].replace(/[^0-9.]/g, "")).toFixed(2);
                     
                     // Remove quotes from verdict
@@ -36,18 +36,19 @@ $(document).ready(function () {
             // 🔹 Sort data by score (highest to lowest)
             tableRows.sort((a, b) => b.score - a.score);
 
-            // 🔹 Track Rank Changes
+            // 🔹 Track Rank Changes & Persist Between Refreshes
             let newRanking = {};
             tableBody.empty();
+
             tableRows.forEach((entry, index) => {
-                let prevRank = prevRanking[entry.influencer] || index + 1; // Default to current rank if no previous record
+                let prevRank = prevRanking[entry.influencer] || (index + 1); // Default to current rank if no previous record
                 let rankChange = prevRank - (index + 1);
-                
-                // Determine CSS class for rank change
-                let rankClass = rankChange > 0 ? "rank-up" : rankChange < 0 ? "rank-down" : "";
+
+                // Determine rank change class
+                let rankClass = rankChange > 0 ? "rank-up" : rankChange < 0 ? "rank-down" : "no-change";
 
                 // Determine Trust Level Color
-                let trustColorClass = "trust-red"; // Default is very low trust
+                let trustColorClass = "trust-red"; // Default: Very Low Trust
                 if (entry.score >= 7) {
                     trustColorClass = "trust-green";
                 } else if (entry.score >= 5) {
@@ -75,13 +76,15 @@ $(document).ready(function () {
                 tableBody.append(row);
             });
 
-            // 🔹 Save new ranking in localStorage for next update
+            // 🔹 Save updated ranking in localStorage AFTER rendering table
             localStorage.setItem("prevRanking", JSON.stringify(newRanking));
+
+            console.log("✅ Updated ranking stored in localStorage:", newRanking);
 
             // 🔹 Add click event to open influencer's X profile
             $(".clickable-row").on("click", function () {
                 let url = $(this).data("url");
-                window.open(url, "_blank"); // Open link in a new tab
+                window.open(url, "_blank");
             });
         }
     });
