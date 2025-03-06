@@ -109,4 +109,20 @@ $(document).ready(function () {
         $("#searchInput").val(""); // Clear input field
         $(".tbl-content table tr").show(); // Show all rows
     });
+
+    // 🔹 Scroll Behavior (Allow Table & Page Scroll Separately)
+    const tableContainer = document.querySelector('.table-container');
+
+    tableContainer.addEventListener('wheel', (event) => {
+        const isAtTop = tableContainer.scrollTop === 0;
+        const isAtBottom = tableContainer.scrollTop + tableContainer.clientHeight >= tableContainer.scrollHeight;
+
+        // If at the top and scrolling up, or at the bottom and scrolling down, allow page to scroll
+        if ((isAtTop && event.deltaY < 0) || (isAtBottom && event.deltaY > 0)) {
+            return; // Let the page scroll
+        }
+
+        // If inside table, prevent page scrolling
+        event.preventDefault();
+    }, { passive: false });
 });

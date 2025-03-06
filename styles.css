@@ -10,9 +10,10 @@ html, body{
 
 .search-container {
     display: flex;
-    justify-content: left;  /* Centers horizontally */
+    justify-content: center;  /* Centers horizontally */
     align-items: center;      /* Centers vertically (if needed) */
     width: 100%;
+    margin-top: 10px;
     margin-bottom: 10px;
     gap: 10px; /* Adds spacing between input and button */
 }
@@ -96,11 +97,30 @@ h2{
     font-style: normal;
     font-variation-settings: "ROND" 0;
     font-size: 18px;
-    text-align: left;
+    text-align: center;
     margin-bottom: 15px;
     padding-bottom: 30px;
 
-    max-width: 1000px; /* Set maximum width */
+    max-width: 769px; /* Set maximum width */
+    margin-left: auto; 
+    margin-right: auto; /* Centers the text */
+    word-wrap: break-word; /* Ensures long words wrap */
+    overflow-wrap: break-word; /* Additional support for wrapping */
+}
+
+h3{
+    color: white;           /* Default text color is white */
+    font-family: "Exo 2", serif;
+    font-optical-sizing: auto;
+    font-weight: 250;
+    font-style: normal;
+    font-variation-settings: "ROND" 0;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 15px;
+    padding-bottom: 30px;
+
+    max-width: 768px; /* Set maximum width */
     margin-left: auto; 
     margin-right: auto; /* Centers the text */
     word-wrap: break-word; /* Ensures long words wrap */
@@ -111,12 +131,13 @@ h2{
     width: 100%;
     max-width: 1000px;   /* Limit total table width */
     margin: auto;   /* Center the table */
+    margin-bottom: 50px;
+    overflow:auto;
 }
 
 table{
     width: 100%;
     table-layout: fixed;
-    bottom-margin: 50px;
     
 }
 
@@ -133,8 +154,7 @@ table{
     height: 400px;
     overflow-x: auto;
     border: 1px solid rgba(255,255,255,0.3);
-    bottom-margin: 50px;
-}
+ }
 
 .tbl-content table tr:hover {
     background-color: rgba(255, 255, 255, 0.135); /* Light highlight effect */
