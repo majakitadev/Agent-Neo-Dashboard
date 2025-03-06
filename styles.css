@@ -132,7 +132,6 @@ h3{
     max-width: 1000px;   /* Limit total table width */
     margin: auto;   /* Center the table */
     margin-bottom: 50px;
-    overflow:auto;
 }
 
 table{
